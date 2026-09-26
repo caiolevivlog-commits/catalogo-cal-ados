@@ -1,0 +1,6 @@
+{
+  "name": "Caio Levi Calçados - Jaú/SP | Atacado & Varejo",
+  "description": "Loja oficial Caio Levi Calçados direto da fábrica em Jaú/SP. Sandálias salto bloco, rasteiras e birkens no atacado e varejo Shopee.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

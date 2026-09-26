@@ -1,0 +1,60 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with contact info and buyer type",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 150 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "companyOrStore": { "type": "string", "maxLength": 120 },
+        "buyerType": { "type": "string", "enum": ["varejo", "atacado_lojista", "revendedor"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "name", "email", "createdAt"]
+    },
+    "WholesaleLead": {
+      "title": "WholesaleLead",
+      "description": "Cadastro e interesse de compra no atacado direto da fábrica de Jaú",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "whatsapp": { "type": "string", "maxLength": 30 },
+        "document": { "type": "string", "maxLength": 30 },
+        "cityState": { "type": "string", "maxLength": 100 },
+        "storeType": { "type": "string", "maxLength": 50 },
+        "interestedVolume": { "type": "string", "maxLength": 50 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "whatsapp", "cityState", "createdAt"]
+    },
+    "PageViewStat": {
+      "title": "PageViewStat",
+      "description": "Contador persistente de acessos e visualizações da loja",
+      "type": "object",
+      "properties": {
+        "count": { "type": "number" },
+        "lastUpdated": { "type": "string" }
+      },
+      "required": ["count"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Perfis de usuários registrados"
+    },
+    "/wholesale_leads/{leadId}": {
+      "schema": { "$ref": "#/entities/WholesaleLead" },
+      "description": "Cadastros de lojistas e revendedores de atacado"
+    },
+    "/stats/{statId}": {
+      "schema": { "$ref": "#/entities/PageViewStat" },
+      "description": "Estatísticas de visualização do site"
+    }
+  }
+}

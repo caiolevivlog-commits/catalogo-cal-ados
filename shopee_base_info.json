@@ -1,0 +1,40 @@
+{
+  "errors": [
+    {
+      "message": "Cannot query field \"title\" on type \"LandingPageBasicInfoEntity\".",
+      "locations": [
+        {
+          "line": 4,
+          "column": 9
+        }
+      ],
+      "extensions": {
+        "code": "GRAPHQL_VALIDATION_FAILED"
+      }
+    },
+    {
+      "message": "Cannot query field \"avatar\" on type \"LandingPageBasicInfoEntity\".",
+      "locations": [
+        {
+          "line": 6,
+          "column": 9
+        }
+      ],
+      "extensions": {
+        "code": "GRAPHQL_VALIDATION_FAILED"
+      }
+    },
+    {
+      "message": "Cannot query field \"landingPageGroupList\" on type \"Query\". Did you mean \"landingPageLinkList\" or \"landingPageBaseInfo\"?",
+      "locations": [
+        {
+          "line": 20,
+          "column": 7
+        }
+      ],
+      "extensions": {
+        "code": "GRAPHQL_VALIDATION_FAILED"
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "errors": [
+    {
+      "message": "Cannot query field \"total\" on type \"GetStorefrontProductListResponse\".",
+      "locations": [
+        {
+          "line": 28,
+          "column": 5
+        }
+      ],
+      "extensions": {
+        "code": "GRAPHQL_VALIDATION_FAILED"
+      }
+    }
+  ]
+}

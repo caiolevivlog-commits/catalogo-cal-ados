@@ -1,0 +1,59 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow list: if false;
+      allow create: if isOwner(userId)
+        && request.resource.data.uid == userId
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 100
+        && request.resource.data.email is string
+        && request.resource.data.email.size() <= 150;
+      allow update: if isOwner(userId)
+        && request.resource.data.uid == existing().uid;
+      allow delete: if false;
+    }
+
+    // Wholesale Leads
+    match /wholesale_leads/{leadId} {
+      allow read: if false;
+      allow create: if request.resource.data.name is string
+        && request.resource.data.name.size() <= 100
+        && request.resource.data.whatsapp is string
+        && request.resource.data.whatsapp.size() <= 30
+        && request.resource.data.cityState is string
+        && request.resource.data.cityState.size() <= 100;
+      allow update, delete: if false;
+    }
+
+    // Stats (Public read page view count, atomic increment update/create)
+    match /stats/{statId} {
+      allow read: if true;
+      allow create, update: if request.resource.data.count is number;
+      allow delete: if false;
+    }
+
+    // Test connection document for connection healthcheck
+    match /test/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}
